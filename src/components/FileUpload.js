@@ -5,8 +5,11 @@ import XHRUpload from '@uppy/xhr-upload';
 import '@uppy/core/dist/style.css';
 import '@uppy/dashboard/dist/style.css';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import navigation hook
 
 const FileUpload = () => {
+  const navigate = useNavigate(); // Initialize navigation
+
   const uppy = new Uppy({
     restrictions: { maxNumberOfFiles: 1, allowedFileTypes: ['.pdf', '.doc', '.docx'] },
     autoProceed: true,
@@ -26,16 +29,35 @@ const FileUpload = () => {
     }
 
     try {
-      const formData = new FormData();
-      formData.append('resume', result.successful[0].data);
-      const response = await axios.post('/api/resume/upload', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-      console.log('Upload successful:', response.data);
+      // Get uploaded file information
+      const fileInfo = result.successful[0];
+      console.log('Uploaded File Info:', fileInfo);
+      console.log('File ID:', fileInfo.response.body.fileId);
+
+      // Perform post-upload document processing
+      await handleDocumentProcessing(fileInfo);
     } catch (error) {
-      console.error('Error uploading file:', error);
+      console.error('Error during post-upload processing:', error);
     }
   });
+
+  const handleDocumentProcessing = async (fileInfo) => {
+    try {
+      console.log('File ID for processing:', fileInfo.response.body.fileId);
+  
+      const response = await axios.post('http://localhost:5000/api/documents/process', {
+        fileId: fileInfo.response.body.fileId, // Send fileId from upload response
+      });
+  
+      console.log('Document Processing Results:', response.data);
+  
+      // Navigate to results page and pass the data
+      navigate('/results', { state: { data: response.data } });
+    } catch (error) {
+      console.error('Error processing document:', error);
+    }
+  };
+  
 
   return <Dashboard uppy={uppy} />;
 };

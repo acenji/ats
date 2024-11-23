@@ -1,19 +1,23 @@
 const express = require('express');
-const router = express.Router();
 const multer = require('multer');
-const upload = multer({ dest: 'uploads/' });
-const extractKeywords = require('../services/keywordExtractor');
+const router = express.Router();
 
-// API to handle file upload and keyword extraction
+const upload = multer({ dest: 'uploads/' }); // Configure multer to save files in 'uploads/' directory
+
 router.post('/upload', upload.single('resume'), (req, res) => {
   if (!req.file) {
+    console.error('No file uploaded');
     return res.status(400).json({ error: 'No file uploaded' });
   }
 
-  const filePath = req.file.path;
-  const keywords = extractKeywords(filePath); // Example usage
-  res.status(200).json({ message: 'File uploaded successfully', keywords });
+  // Use multer's generated filename as the file ID
+  const fileId = req.file.filename; // 'req.file' contains file metadata
+  console.log('File uploaded successfully, fileId:', fileId); // Debug log for fileId
+
+  res.json({
+    message: 'File uploaded successfully',
+    fileId, // Include fileId in the response
+  });
 });
 
 module.exports = router;
-

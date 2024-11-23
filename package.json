@@ -6,9 +6,18 @@
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@uppy/core": "^4.2.3",
+    "@uppy/react": "^4.0.3",
+    "@uppy/xhr-upload": "^4.2.2",
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "multer": "^1.4.5-lts.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-router-dom": "^7.0.1",
     "react-scripts": "5.0.1",
+    "uppy": "^4.7.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,5 +43,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:5000"  
 }

@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+require('dotenv').config({ path: '../.env' }); // Explicitly load .env from project root
 
-dotenv.config();
+console.log("Loaded API Key:", process.env.OPENAI_API_KEY); // Debug the loaded API key
 
 const app = express();
 

@@ -12,11 +12,15 @@
     "axios": "^1.7.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
+    "langchain": "^0.3.6",
     "multer": "^1.4.5-lts.1",
+    "openai": "^4.73.0",
+    "pdf-parse": "^1.1.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.0.1",
     "react-scripts": "5.0.1",
+    "textract": "^2.5.0",
     "uppy": "^4.7.0",
     "web-vitals": "^2.1.4"
   },
@@ -44,5 +48,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000"  
+  "proxy": "http://localhost:5000"
 }

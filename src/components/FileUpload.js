@@ -44,10 +44,22 @@ const FileUpload = () => {
   const handleDocumentProcessing = async (fileInfo) => {
     try {
       console.log('File ID for processing:', fileInfo.response.body.fileId);
+
+      console.log("File Info Response Body:", fileInfo.response.body);
   
       const response = await axios.post('http://localhost:5000/api/documents/process', {
-        fileId: fileInfo.response.body.fileId, // Send fileId from upload response
+        fileId: fileInfo.response.body.fileId,
+        fileText: fileInfo.response.body.fileText,
+      }, {
+        headers: {
+          'Content-Type': 'application/json', // Explicitly set content type
+        },
       });
+      console.log('Request to /process:', {
+        fileId: fileInfo.response.body.fileId,
+        fileText: fileInfo.response.body.fileText,
+      });
+      
   
       console.log('Document Processing Results:', response.data);
   

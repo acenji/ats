@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const Results = () => {
   const navigate = useNavigate();
@@ -10,19 +11,43 @@ const Results = () => {
   const resumeKeywords = Array.isArray(state?.resumeKeywords) ? state.resumeKeywords : [];
   const jobKeywords = Array.isArray(state?.jobKeywords) ? state.jobKeywords : [];
 
-  // Sort keywords alphabetically
-  const sortedResumeKeywords = [...resumeKeywords].sort((a, b) => a.localeCompare(b));
-  const sortedJobKeywords = [...jobKeywords].sort((a, b) => a.localeCompare(b));
+  // State to store sorted keywords
+  const [sortedResumeKeywords, setSortedResumeKeywords] = useState([]);
+  const [sortedJobKeywords, setSortedJobKeywords] = useState([]);
 
-  // Find missing keywords
-  const missingKeywords = sortedJobKeywords.filter(
-    (keyword) => !sortedResumeKeywords.includes(keyword)
-  );
+  // State to store matching, missing, and soft matches
+  const [matchingKeywords, setMatchingKeywords] = useState([]);
+  const [missingKeywords, setMissingKeywords] = useState([]);
+  const [softMatches, setSoftMatches] = useState([]);
 
-  // Find matching keywords
-  const matchingKeywords = sortedResumeKeywords.filter((keyword) =>
-    sortedJobKeywords.includes(keyword)
-  );
+  useEffect(() => {
+    // Sort keywords alphabetically
+    setSortedResumeKeywords([...resumeKeywords].sort((a, b) => a.localeCompare(b)));
+    setSortedJobKeywords([...jobKeywords].sort((a, b) => a.localeCompare(b)));
+
+    // Find matching and missing keywords
+    const matching = resumeKeywords.filter((keyword) => jobKeywords.includes(keyword));
+    const missing = jobKeywords.filter((keyword) => !resumeKeywords.includes(keyword));
+    setMatchingKeywords(matching);
+    setMissingKeywords(missing);
+
+    // Fetch soft matches from the backend
+    if (resumeKeywords.length > 0 && jobKeywords.length > 0) {
+      fetchSoftMatches(resumeKeywords, jobKeywords);
+    }
+  }, [resumeKeywords, jobKeywords]);
+
+  const fetchSoftMatches = async (resumeKeywords, jobKeywords) => {
+    try {
+      const response = await axios.post('http://localhost:5000/api/documents/match', {
+        resumeKeywords,
+        jobKeywords,
+      });
+      setSoftMatches(response.data.softMatches || []);
+    } catch (error) {
+      console.error('Error fetching soft matches:', error.message);
+    }
+  };
 
   return (
     <div>
@@ -61,6 +86,19 @@ const Results = () => {
           missingKeywords.map((keyword, index) => <li key={index}>{keyword}</li>)
         ) : (
           <p>All keywords from job description are present in the resume.</p>
+        )}
+      </ul>
+
+      <h2>Soft Matches:</h2>
+      <ul>
+        {softMatches.length > 0 ? (
+          softMatches.map((match, index) => (
+            <li key={index}>
+              {match.resumeKeyword} ↔ {match.jobKeyword} (Confidence: {match.confidence.toFixed(2)})
+            </li>
+          ))
+        ) : (
+          <p>No soft matches found.</p>
         )}
       </ul>
 

@@ -10,13 +10,18 @@ const Results = () => {
   const resumeKeywords = Array.isArray(state?.resumeKeywords) ? state.resumeKeywords : [];
   const jobKeywords = Array.isArray(state?.jobKeywords) ? state.jobKeywords : [];
 
-  // Sort keywords alphabetically (only if they are arrays)
+  // Sort keywords alphabetically
   const sortedResumeKeywords = [...resumeKeywords].sort((a, b) => a.localeCompare(b));
   const sortedJobKeywords = [...jobKeywords].sort((a, b) => a.localeCompare(b));
 
   // Find missing keywords
   const missingKeywords = sortedJobKeywords.filter(
     (keyword) => !sortedResumeKeywords.includes(keyword)
+  );
+
+  // Find matching keywords
+  const matchingKeywords = sortedResumeKeywords.filter((keyword) =>
+    sortedJobKeywords.includes(keyword)
   );
 
   return (
@@ -38,6 +43,15 @@ const Results = () => {
           sortedJobKeywords.map((keyword, index) => <li key={index}>{keyword}</li>)
         ) : (
           <p>No keywords extracted from job description.</p>
+        )}
+      </ul>
+
+      <h2>Matching Keywords (Alphabetical):</h2>
+      <ul>
+        {matchingKeywords.length > 0 ? (
+          matchingKeywords.map((keyword, index) => <li key={index}>{keyword}</li>)
+        ) : (
+          <p>No matching keywords found.</p>
         )}
       </ul>
 

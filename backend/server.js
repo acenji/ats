@@ -25,6 +25,8 @@ app.use('/api/resume', resumeRoutes);
 const documentRoutes = require('./routes/documents');
 app.use('/api/documents', documentRoutes);
 
+const jobRoutes = require('./routes/job'); // Add job routes
+app.use('/api/job', jobRoutes); // Add job description-related routes
 
 // Start the server
 const PORT = process.env.PORT || 5000;

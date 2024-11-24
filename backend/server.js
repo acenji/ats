@@ -22,11 +22,11 @@ app.use(express.urlencoded({ extended: true }));
 const resumeRoutes = require('./routes/resume');
 app.use('/api/resume', resumeRoutes);
 
-const documentRoutes = require('./routes/documents');
+const documentRoutes = require('./routes/documents'); // Include document routes (with /match)
 app.use('/api/documents', documentRoutes);
 
-const jobRoutes = require('./routes/job'); // Add job routes
-app.use('/api/job', jobRoutes); // Add job description-related routes
+const jobRoutes = require('./routes/job'); // Include job routes
+app.use('/api/job', jobRoutes);
 
 // Start the server
 const PORT = process.env.PORT || 5000;

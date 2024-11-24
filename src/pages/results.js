@@ -2,42 +2,57 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const Results = () => {
-  const location = useLocation();
   const navigate = useNavigate();
-  const { data } = location.state || {};
+  const location = useLocation();
+  const { state } = location || {};
 
-  if (!data) {
-    return (
-      <div style={{ padding: '20px', textAlign: 'center' }}>
-        <p>No results available. Please upload a document first.</p>
-        <button onClick={() => navigate('/')} aria-label="Back to Upload">
-          Back to Upload
-        </button>
-      </div>
-    );
-  }
+  // Ensure resumeKeywords and jobKeywords are arrays
+  const resumeKeywords = Array.isArray(state?.resumeKeywords) ? state.resumeKeywords : [];
+  const jobKeywords = Array.isArray(state?.jobKeywords) ? state.jobKeywords : [];
+
+  // Sort keywords alphabetically (only if they are arrays)
+  const sortedResumeKeywords = [...resumeKeywords].sort((a, b) => a.localeCompare(b));
+  const sortedJobKeywords = [...jobKeywords].sort((a, b) => a.localeCompare(b));
+
+  // Find missing keywords
+  const missingKeywords = sortedJobKeywords.filter(
+    (keyword) => !sortedResumeKeywords.includes(keyword)
+  );
 
   return (
-    <div style={{ padding: '20px', maxWidth: '600px', margin: '0 auto' }}>
+    <div>
       <h1>Document Processing Results</h1>
-      <p>
-        Document with ID: <strong>{data.fileId}</strong> processed successfully.
-      </p>
-      <h2>Extracted Keywords:</h2>
-      {data.keywords.length > 0 ? (
-        <ul>
-          {data.keywords.map((keyword, index) => (
-            <li key={index}>{keyword}</li>
-          ))}
-        </ul>
-      ) : (
-        <p>No keywords extracted.</p>
-      )}
-      <button onClick={() => navigate('/')} aria-label="Back to Upload">
-        Back to Upload
-      </button>
+
+      <h2>Keywords Extracted from Resume (Alphabetical):</h2>
+      <ul>
+        {sortedResumeKeywords.length > 0 ? (
+          sortedResumeKeywords.map((keyword, index) => <li key={index}>{keyword}</li>)
+        ) : (
+          <p>No keywords extracted from resume.</p>
+        )}
+      </ul>
+
+      <h2>Keywords Extracted from Job Description (Alphabetical):</h2>
+      <ul>
+        {sortedJobKeywords.length > 0 ? (
+          sortedJobKeywords.map((keyword, index) => <li key={index}>{keyword}</li>)
+        ) : (
+          <p>No keywords extracted from job description.</p>
+        )}
+      </ul>
+
+      <h2>Missing Keywords (Alphabetical):</h2>
+      <ul>
+        {missingKeywords.length > 0 ? (
+          missingKeywords.map((keyword, index) => <li key={index}>{keyword}</li>)
+        ) : (
+          <p>All keywords from job description are present in the resume.</p>
+        )}
+      </ul>
+
+      <button onClick={() => navigate('/')}>Back to Upload</button>
     </div>
   );
 };
 
-export default Results; // Ensure this line is present
+export default Results;

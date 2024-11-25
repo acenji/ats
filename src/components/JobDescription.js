@@ -51,7 +51,7 @@ const JobDescription = ({ onJobDescriptionProcessed }) => {
       <br />
       <input type="file" accept=".pdf,.doc,.docx,.txt" onChange={handleFileChange} />
       <br />
-      <button type="submit">Submit Job Description</button>
+      <button type="submit">Submit Job Description here</button>
     </form>
   );
 };

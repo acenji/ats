@@ -7,6 +7,8 @@ const Results = () => {
   const location = useLocation();
   const { state } = location || {};
 
+  console.log('State passed to Results:', state);
+
   // Ensure resumeKeywords and jobKeywords are arrays
   const resumeKeywords = Array.isArray(state?.resumeKeywords) ? state.resumeKeywords : [];
   const jobKeywords = Array.isArray(state?.jobKeywords) ? state.jobKeywords : [];
@@ -52,6 +54,20 @@ const Results = () => {
   return (
     <div>
       <h1>Document Processing Results</h1>
+      <button onClick={() => navigate('/')}>Back to Upload</button>
+
+      <h2>Soft Matches:</h2>
+      <ul>
+        {softMatches.length > 0 ? (
+          softMatches.map((match, index) => (
+            <li key={index}>
+              {match.resumeKeyword} ↔ {match.jobKeyword} (Confidence: {match.confidence.toFixed(2)})
+            </li>
+          ))
+        ) : (
+          <p>No soft matches found.</p>
+        )}
+      </ul>
 
       <h2>Keywords Extracted from Resume (Alphabetical):</h2>
       <ul>
@@ -89,20 +105,9 @@ const Results = () => {
         )}
       </ul>
 
-      <h2>Soft Matches:</h2>
-      <ul>
-        {softMatches.length > 0 ? (
-          softMatches.map((match, index) => (
-            <li key={index}>
-              {match.resumeKeyword} ↔ {match.jobKeyword} (Confidence: {match.confidence.toFixed(2)})
-            </li>
-          ))
-        ) : (
-          <p>No soft matches found.</p>
-        )}
-      </ul>
+      
 
-      <button onClick={() => navigate('/')}>Back to Upload</button>
+      
     </div>
   );
 };

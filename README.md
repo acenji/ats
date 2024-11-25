@@ -108,5 +108,3 @@ Push the branch and create a pull request.
 License
 
 This project is open-source and licensed under the MIT License. See the LICENSE file for details.
-
-

@@ -105,6 +105,14 @@ Commit your changes:
    git commit -m "Description of changes"
 Push the branch and create a pull request.
 
+## Technologies Used
+
+- **Frontend**: [React.js](https://reactjs.org/) (JavaScript library for building user interfaces)
+- **Backend**: [Node.js](https://nodejs.org/) (JavaScript runtime environment)
+- **Package Manager**: [npm](https://www.npmjs.com/) (Node Package Manager)
+
+
+
 License
 
 This project is open-source and licensed under the MIT License. See the LICENSE file for details.

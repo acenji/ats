@@ -29,7 +29,11 @@ const extractKeywords = async (text) => {
   }
 
   try {
-    const prompt = `Extract the most relevant keywords from the following text. 
+    const prompt = `Extract the most relevant and specific keywords from the following text. Focus on:
+    - Technical skills (e.g., programming languages, frameworks, tools).
+    - Professional achievements (e.g., projects, leadership roles, metrics-driven accomplishments).
+    - Senior-level experience indicators (e.g., team management, strategic decision-making, architecture design).
+    - Certifications, advanced degrees, and professional memberships. 
     Return a comma-separated list of keywords:\n\n${text}`;
 
     console.log("OpenAI Prompt:", prompt);

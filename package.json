@@ -9,6 +9,7 @@
     "@uppy/core": "^4.2.3",
     "@uppy/react": "^4.0.3",
     "@uppy/xhr-upload": "^4.2.2",
+    "antd": "^5.22.2",
     "axios": "^1.7.7",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",

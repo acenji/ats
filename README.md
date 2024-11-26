@@ -82,7 +82,7 @@ The backend will run at http://localhost:5000 by default.
 From the root directory, start the React app:
 
 npm start
-The frontend will open at http://localhost:5001.
+The frontend will open at http://localhost:5001 if you followed the .env.example.
 
 Usage
 

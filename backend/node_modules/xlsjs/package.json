@@ -1,0 +1,37 @@
+{
+	"name": "xlsjs",
+	"version": "0.7.6",
+	"author": "sheetjs",
+	"description": "Excel 5.0/95 and 97-2004 spreadsheet (BIFF5 XLS / BIFF8 XLS / XML 2003) parser",
+	"keywords": [ "excel", "xls", "office", "spreadsheet" ],
+	"bin": {
+		"xls": "./bin/xls.njs"
+	},
+	"main": "./xls",
+	"dependencies": {
+		"exit-on-epipe":"",
+		"ssf":"~0.8.1",
+		"codepage":"",
+		"cfb":"~0.11.0",
+		"commander":""
+	},
+	"devDependencies": {
+		"mocha":"",
+		"xlsx":"",
+		"uglify-js":""
+	},
+	"repository": { "type":"git", "url":"git://github.com/SheetJS/js-xls.git" },
+	"scripts": {
+		"pretest": "git submodule init && git submodule update",
+		"test": "make mocha"
+	},
+	"config": {
+		"blanket": {
+			"pattern": "xls.js"
+		}
+	},
+	"homepage": "https://oss.sheetjs.com/js-xls/",
+	"bugs": { "url": "https://github.com/SheetJS/js-xls/issues" },
+	"license": "Apache-2.0",
+	"engines": { "node": ">=0.8" }
+}

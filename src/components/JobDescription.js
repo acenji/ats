@@ -42,7 +42,7 @@ const JobDescription = ({ onJobDescriptionProcessed }) => {
   return (
     <form onSubmit={handleSubmit}>
       <textarea
-        placeholder="Paste job description here..."
+        placeholder="Paste job1qwwwwwwwwwwwww description here..."
         value={jobDescription}
         onChange={handleTextChange}
         rows="5"

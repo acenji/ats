@@ -117,7 +117,11 @@ const FileUpload = () => {
       {/* Resume Upload Section */}
       <div style={{ marginBottom: '30px' }}>
         <h2>Upload Resume</h2>
-        <Dashboard uppy={uppy} />
+        <Dashboard 
+        uppy={uppy} 
+        width={400}
+        height={300}
+        />
         {isResumeUploaded && <p>Resume uploaded and processed successfully.</p>}
       </div>
 
@@ -141,7 +145,7 @@ const FileUpload = () => {
             style={{ marginBottom: '15px' }}
           />
           <br />
-          <button type="submit">Submit Job Description</button>
+          <button type="submit">Submit to Process Resume and Job Description</button>
         </form>
         {isJobDescriptionProcessed && <p>Job description processed successfully.</p>}
       </div>

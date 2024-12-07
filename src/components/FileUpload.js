@@ -111,33 +111,68 @@ const FileUpload = () => {
   };
 
   return (
-    <div>
+    <div
+      style={{
+      padding: '20px', // Adds space around the content
+      maxWidth: '600px', // Limits the width of the form for better readability
+      margin: '0 auto', // Centers the form horizontally
+      border: '1px solid #ccc', // Optional: Add a light border for better visibility
+      borderRadius: '8px', // Optional: Rounded corners for a polished look
+      boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Optional: Subtle shadow for a modern look
+      backgroundColor: '#f9f9f9', // Optional: Light background for better contrast
+      }}
+    >
       <h1>Upload Resume and Job Description</h1>
 
       {/* Resume Upload Section */}
-      <div style={{ marginBottom: '30px' }}>
-        <h2>Upload Resume</h2>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center', // Centers horizontally
+          alignItems: 'center', // Centers vertically
+          height: '30vh', // Takes the full height of the viewport
+          flexDirection: 'column', // Ensures the heading and dashboard are stacked
+        }}
+      >
+        <h2>Upload Resume Here</h2>
         <Dashboard 
         uppy={uppy} 
-        width={400}
-        height={300}
+        width={300}
+        height={200}
         />
         {isResumeUploaded && <p>Resume uploaded and processed successfully.</p>}
       </div>
 
       {/* Job Description Section */}
-      <div>
+      <div
+        style={{
+          padding: '20px', // Adds space around the content
+          maxWidth: '600px', // Limits the width of the form for better readability
+          margin: '0 auto', // Centers the form horizontally
+          border: '1px solid #ccc', // Optional: Add a light border for better visibility
+          borderRadius: '8px', // Optional: Rounded corners for a polished look
+          boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)', // Optional: Subtle shadow for a modern look
+          backgroundColor: '#f9f9f9', // Optional: Light background for better contrast
+        }}
+      >
         <h2>Upload or Paste Job Description</h2>
         <form onSubmit={handleJobDescriptionSubmit}>
-          <textarea
-            placeholder="Paste job description here..."
-            value={jobDescription}
-            onChange={(e) => setJobDescription(e.target.value)}
-            rows="5"
-            cols="50"
-            style={{ marginBottom: '15px', width: '100%' }}
-          />
-          <br />
+        <textarea
+          placeholder="Paste job description here..."
+          value={jobDescription}
+          onChange={(e) => setJobDescription(e.target.value)}
+          rows="5"
+          style={{
+            marginBottom: '15px', // Adds spacing below the textarea
+            width: '100%',        // Makes it responsive and fit the parent container
+            maxWidth: '100%',     // Ensures it doesn't overflow
+            resize: 'vertical',   // Allows only vertical resizing
+            padding: '20px',      // Adds padding for better text readability
+            fontSize: '16px',     // Improves font readability
+            boxSizing: 'border-box', // Includes padding in width calculation
+          }}
+        />
+        <br />
           <input
             type="file"
             accept=".pdf,.doc,.docx,.txt"

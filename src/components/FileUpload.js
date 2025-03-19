@@ -24,7 +24,7 @@ const FileUpload = () => {
 
   // Configure Uppy for resume upload
   uppy.use(XHRUpload, {
-    endpoint: 'http://localhost:5000/api/resume/upload',
+    endpoint: 'http://localhost:5001/api/resume/upload',
     formData: true,
     fieldName: 'resume',
   });
@@ -41,7 +41,7 @@ const FileUpload = () => {
       console.log('Uploaded Resume Info:', fileInfo);
 
       const response = await axios.post(
-        'http://localhost:5000/api/documents/process',
+        'http://localhost:5001/api/documents/process',
         {
           fileId: fileInfo.response.body.fileId,
           fileText: fileInfo.response.body.fileText,
@@ -72,7 +72,7 @@ const FileUpload = () => {
         formData.append('jobDescription', jobFile);
 
         const response = await axios.post(
-          'http://localhost:5000/api/job/upload',
+          'http://localhost:5001/api/job/upload',
           formData,
           { headers: { 'Content-Type': 'multipart/form-data' } }
         );
@@ -80,7 +80,7 @@ const FileUpload = () => {
       } else if (jobDescription.trim()) {
         // Process pasted job description text
         const response = await axios.post(
-          'http://localhost:5000/api/job/keywords',
+          'http://localhost:5001/api/job/keywords',
           { text: jobDescription },
           { headers: { 'Content-Type': 'application/json' } }
         );

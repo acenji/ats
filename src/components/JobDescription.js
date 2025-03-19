@@ -23,13 +23,13 @@ const JobDescription = ({ onJobDescriptionProcessed }) => {
         const formData = new FormData();
         formData.append("jobDescription", file);
 
-        const response = await axios.post("http://localhost:5000/api/job/upload", formData, {
+        const response = await axios.post("http://localhost:5001/api/job/upload", formData, {
           headers: { "Content-Type": "multipart/form-data" },
         });
 
         extractedKeywords = response.data.keywords;
       } else {
-        const response = await axios.post("http://localhost:5000/api/job/keywords", { text: jobDescription });
+        const response = await axios.post("http://localhost:5001/api/job/keywords", { text: jobDescription });
         extractedKeywords = response.data.keywords;
       }
 

@@ -48,13 +48,13 @@ Frontend: Provides a user-friendly interface for uploading resumes and job descr
 
 Getting Started
 
-Prerequisites
+1. Prerequisites
 Ensure the following tools are installed:
 
 Node.js (v14 or later)
 npm
 
-Installation
+2. Installation
 Clone the repository:
    git clone https://github.com/your-username/ats-system.git
    cd ats-system
@@ -68,30 +68,70 @@ Frontend:
    cd ..
    npm install
 
+3. Set up local environments
+clone (or create)  in the root folder the file .env.example into .env.local
+REACT_APP_API_URL=http://localhost:5001
+
+clone (or create)inside the backend folder the file .env.example into env.local
+OPENAI_API_KEY=TYPE-YOUR-API_KEY-HERE_WITHOUT-QUOTES
+PORT=5001
+
+
 Running the Project
-1. Start the Backend
+4. Start the Backend
 
 Navigate to the backend/ directory and start the server:
 
 cd backend
 node server.js
-The backend will run at http://localhost:5000 by default.
+The backend will run at http://localhost:5001 by default.
 
-2. Start the Frontend
+5. Start the Frontend
 
 From the root directory, start the React app:
 
 npm start
-The frontend will open at http://localhost:5001 if you followed the .env.example.
+The frontend will open at http://localhost:3000 if you followed the .env.example.
 
-Usage
+6. How to use the application
 
-Upload a resume and a job description through the interface.
-View the analysis:
-Soft Matches with confidence levels.
-Extracted Keywords sorted alphabetically.
-Mechanically Matched Keywords (100% similarity).
-Missing Keywords from the job description.
+6.1 <u>Upload a resume<u>
+Supported files:PDF, DOC, DOCX
+
+Upload a resume in the supported file types listed above. 
+
+6.2 <u>Upload Job Description<u>
+After the validation and verification completes and the file is checked-marked as OK, 
+add job description: either as a file in the same format as the resume or copy/paste as a plain text.
+
+6.3 Click button "Submit to Process Resume and job Description"
+
+7. How to Read the Analyses?
+
+7.1 Layout of the Outcome
+During a live session, several segments will be populated with data. The current segments include:
+Soft Matches with Confidence Levels (0.00 - 1.00)
+Simply matching keywords mechanically is not enough to determine if a resume is a strong fit.
+Soft Matching is an AI-powered, human-like converter that analyzes keywords from the resume,
+aiming to match them linguistically, preserving intent and context.
+Users can set a threshold level to ignore matches below a certain confidence score.
+
+Example:
+- "Visual Studio ↔ certifications" (Confidence: 0.50) → Likely ignored.
+- "Product Roadmap Development ↔ product roadmap" (Confidence: 0.88) → Likely accepted.
+
+- Keywords Extracted from Resume (Alphabetical)
+AI extracts relevant keywords directly from the resume.
+
+- Keywords Extracted from Job Description (Alphabetical)
+AI extracts key terms from the job description.
+
+- Matching Keywords (Alphabetical)
+This section mechanically identifies overlapping keywords between the extracted resume and job description keywords (case insensitive).
+
+- Missing Keywords (Alphabetical)
+This section highlights keywords found in the job description but absent from the resume, helping identify potential gaps.
+
 Use the insights to refine the resume.
 
 Contributing

@@ -30,67 +30,73 @@ The project is organized into two main components: **Backend:** Contains the log
 
 ## Getting Started  
 
-### 1. Prerequisites  
+### 5. Prerequisites  
 Ensure the following tools are installed: **[Node.js](https://nodejs.org/)** (v14 or later), **[npm](https://www.npmjs.com/)** (Node Package Manager).  
 
-### 2. Installation  
+### 6. Installation  
 Clone the repository:  
 ```sh
 git clone https://github.com/your-username/ats-system.git  
 cd ats-system  
 
 
-Install dependencies:
+### Install Dependencies 
 
-Backend:
-   cd backend
-   npm install
+#### Backend:  
+```sh
+cd backend  
+npm install  
+```
 
-Frontend:
+####Frontend:
+```sh
    cd ..
    npm install
+```
+### 7. Set up local environments
+Clone (or create) the .env.example file in the root folder and rename it to .env.local:
+REACT_APP_API_URL=http://localhost:5001  
 
-3. Set up local environments
-clone (or create)  in the root folder the file .env.example into .env.local
-REACT_APP_API_URL=http://localhost:5001
-
-clone (or create)inside the backend folder the file .env.example into env.local
+Clone (or create) the .env.example file inside the backend folder and rename it to .env.local:
 OPENAI_API_KEY=TYPE-YOUR-API_KEY-HERE_WITHOUT-QUOTES
 PORT=5001
 
 
-Running the Project
-4. Start the Backend
+## Running the Project
+
+### 8. Start the Backend
 
 Navigate to the backend/ directory and start the server:
-
+```sh
 cd backend
 node server.js
+```
+
 The backend will run at http://localhost:5001 by default.
 
-5. Start the Frontend
+### 9. Start the Frontend
 
 From the root directory, start the React app:
-
+```sh
 npm start
-The frontend will open at http://localhost:3000 if you followed the .env.example.
+```
+The frontend will open at http://localhost:3000 if you followed the .env.example setup.
 
-6. How to use the application
+### 10. How to use the application
 
-6.1 <u>Upload a resume<u>
-Supported files:PDF, DOC, DOCX
+#### 10.1 <u>Upload a resume<u>
+- Supported file formats: PDF, DOC, DOCX.<br>
+- Upload a resume in one of the supported file types.<br>
 
-Upload a resume in the supported file types listed above. 
-
-6.2 <u>Upload Job Description<u>
+#### 10.2 <u>Upload Job Description<u>
 After the validation and verification completes and the file is checked-marked as OK, 
 add job description: either as a file in the same format as the resume or copy/paste as a plain text.
 
-6.3 Click button "Submit to Process Resume and job Description"
+#### 10.3 Click button "Submit to Process Resume and job Description"
 
-7. How to Read the Analyses?
+### 11. How to Read the Analyses?
 
-7.1 Layout of the Outcome
+#### 11.1 Layout of the Outcome
 During a live session, several segments will be populated with data. The current segments include:
 Soft Matches with Confidence Levels (0.00 - 1.00)
 Simply matching keywords mechanically is not enough to determine if a resume is a strong fit.

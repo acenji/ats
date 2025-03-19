@@ -38,7 +38,7 @@ Clone the repository:
 ```sh
 git clone https://github.com/your-username/ats-system.git  
 cd ats-system  
-
+```
 
 ### Install Dependencies 
 
@@ -48,7 +48,7 @@ cd backend
 npm install  
 ```
 
-####Frontend:
+#### Frontend:
 ```sh
    cd ..
    npm install

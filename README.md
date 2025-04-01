@@ -36,8 +36,8 @@ Ensure the following tools are installed: **[Node.js](https://nodejs.org/)** (v1
 ### 6. Installation  
 Clone the repository:  
 ```sh
-git clone https://github.com/your-username/ats-system.git  
-cd ats-system  
+git clone https://github.com/acenji/ats.git  
+cd ats  
 ```
 
 ### Install Dependencies 
